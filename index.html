@@ -184,6 +184,31 @@
     color: var(--text-soft); font-size: 12px;
   }
 
+  /* Back to top */
+  .back-top {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 44px; height: 44px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .3s, transform .3s;
+    pointer-events: none;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .back-top.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   @media (max-width: 400px) {
     .recipe-card { padding: 14px; }
     .recipe-card .card-title { font-size: 15px; }
@@ -195,7 +220,7 @@
 <div class="hero">
   <div class="avatar">🍲</div>
   <h1>明星私厨钟姐</h1>
-  <p class="sub">产后月子餐 · 16 道菜谱 · <span style="font-size:11px;opacity:.6">v1.2</span></p>
+  <p class="sub">产后月子餐 · 16 道菜谱 · <span style="font-size:11px;opacity:.6">v1.3</span></p>
 </div>
 
 <h2 class="section-title">📋 菜谱提纲</h2>
@@ -512,4 +537,23 @@
 </div>
 
 </body>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<script>
+(function(){
+  var btn = document.getElementById('backTop');
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      requestAnimationFrame(function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
+</script>
+
 </html>
