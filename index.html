@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>明星私厨钟姐 — 月子餐菜谱</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --card: #ffffff;
+    --accent: #d4644a;
+    --accent-soft: #fdf0ec;
+    --text: #2c2416;
+    --text-soft: #6b5e4f;
+    --border: #ede6db;
+    --tag-bg: #f5efe5;
+    --likes: #e87461;
+    --gold: #c4984a;
+    --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 40px 0 24px;
+  }
+  .hero .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8a87c, #d4644a);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 32px;
+  }
+  .hero h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .hero .sub {
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+  .hero .meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+  .hero .meta span { display: flex; align-items: center; gap: 4px; }
+  .hero .meta .num { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .stats-bar .stat { text-align: center; }
+  .stats-bar .stat .val { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stats-bar .stat .lbl { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+
+  /* Section Title */
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 28px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  /* Summary Table */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .summary-table th {
+    text-align: left;
+    padding: 8px 6px;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-soft);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .summary-table td {
+    padding: 7px 6px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .summary-table .idx { width: 28px; color: var(--text-soft); font-weight: 600; }
+  .summary-table .title-cell { font-weight: 500; }
+  .summary-table .likes-cell { color: var(--likes); font-weight: 600; white-space: nowrap; }
+  .summary-table .comments-cell { color: var(--text-soft); white-space: nowrap; }
+
+  /* Recipe Card */
+  .recipe-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .recipe-card .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .recipe-card .card-num {
+    background: var(--accent);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .recipe-card .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .recipe-card .card-stats {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+    padding-left: 38px;
+  }
+  .recipe-card .card-stats .likes { color: var(--likes); font-weight: 600; }
+  .recipe-card .card-stats .comments { color: var(--gold); font-weight: 600; }
+
+  .recipe-card .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin: 14px 0 6px;
+    padding-left: 38px;
+  }
+  .recipe-card .section-content {
+    font-size: 14px;
+    color: var(--text);
+    padding-left: 38px;
+    line-height: 1.8;
+  }
+  .recipe-card .section-content p { margin-bottom: 6px; }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-left: 38px;
+    margin-top: 8px;
+  }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--text-soft);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* Comment highlights */
+  .comment-list {
+    padding-left: 38px;
+    list-style: none;
+  }
+  .comment-list li {
+    position: relative;
+    padding: 6px 0 6px 16px;
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    border-left: 2px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .comment-list li::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 12px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 0 20px;
+    color: var(--text-soft);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 20px; }
+    .recipe-card { padding: 14px; }
+    .recipe-card .card-title { font-size: 15px; }
+    .recipe-card .section-content, .comment-list, .tags { padding-left: 0; }
+    .recipe-card .section-label { padding-left: 0; }
+    .recipe-card .card-stats { padding-left: 0; }
+    .summary-table { font-size: 12px; }
+    .summary-table th, .summary-table td { padding: 6px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="avatar">🍲</div>
+  <h1>明星私厨钟姐</h1>
+  <p class="sub">产后月子餐 · 高端月嫂培训 · 食疗养生</p>
+  <div class="meta">
+    <span>📱 <span class="num">1.4M</span> 赞与收藏</span>
+    <span>🎬 <span class="num">19</span> 道菜谱</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="val">19</div><div class="lbl">成功抓取</div></div>
+  <div class="stat"><div class="val">1155+</div><div class="lbl">最高评论</div></div>
+  <div class="stat"><div class="val">10万+</div><div class="lbl">最高点赞</div></div>
+</div>
+
+<h2 class="section-title">📋 菜谱总览</h2>
+
+<table class="summary-table">
+<thead><tr><th>#</th><th>菜谱</th><th>👍</th><th>💬</th></tr></thead>
+<tbody>
+<tr><td class="idx">1</td><td class="title-cell">瘦肉精华汤</td><td class="likes-cell">10万+</td><td class="comments-cell">1155</td></tr>
+<tr><td class="idx">2</td><td class="title-cell">营养月子餐第一周食谱</td><td class="likes-cell">8,133</td><td class="comments-cell">85</td></tr>
+<tr><td class="idx">3</td><td class="title-cell">夏季滋补月子汤</td><td class="likes-cell">39</td><td class="comments-cell">3</td></tr>
+<tr><td class="idx">4</td><td class="title-cell">鱿鱼香菇蒸肉饼</td><td class="likes-cell">42</td><td class="comments-cell">2</td></tr>
+<tr><td class="idx">5</td><td class="title-cell">低卡无油水焖菜</td><td class="likes-cell">81</td><td class="comments-cell">3</td></tr>
+<tr><td class="idx">6</td><td class="title-cell">木瓜燕窝羹</td><td class="likes-cell">62</td><td class="comments-cell">3</td></tr>
+<tr><td class="idx">7</td><td class="title-cell">山药芡实排骨汤</td><td class="likes-cell">83</td><td class="comments-cell">5</td></tr>
+<tr><td class="idx">8</td><td class="title-cell">鲍鱼滋补养生汤</td><td class="likes-cell">125</td><td class="comments-cell">6</td></tr>
+<tr><td class="idx">9</td><td class="title-cell">低卡蔬菜鸡肉卷</td><td class="likes-cell">102</td><td class="comments-cell">4</td></tr>
+<tr><td class="idx">10</td><td class="title-cell">黄精桑葚鸡蛋茶</td><td class="likes-cell">100</td><td class="comments-cell">3</td></tr>
+<tr><td class="idx">11</td><td class="title-cell">月嫂上户经验分享</td><td class="likes-cell">62</td><td class="comments-cell">4</td></tr>
+<tr><td class="idx">12</td><td class="title-cell">致月嫂姐妹的一封信</td><td class="likes-cell">55</td><td class="comments-cell">9</td></tr>
+<tr><td class="idx">13</td><td class="title-cell">第四周进补花胶鸡汤</td><td class="likes-cell">76</td><td class="comments-cell">10</td></tr>
+<tr><td class="idx">14</td><td class="title-cell">海参花胶瘦肉水</td><td class="likes-cell">99</td><td class="comments-cell">5</td></tr>
+<tr><td class="idx">15</td><td class="title-cell">春夏秋冬坐月子指南</td><td class="likes-cell">65</td><td class="comments-cell">6</td></tr>
+<tr><td class="idx">16</td><td class="title-cell">低脂冬瓜桑拿鸡</td><td class="likes-cell">162</td><td class="comments-cell">8</td></tr>
+<tr><td class="idx">17</td><td class="title-cell">月子餐1-4周万能公式</td><td class="likes-cell">161</td><td class="comments-cell">4</td></tr>
+<tr><td class="idx">18</td><td class="title-cell">南瓜燕窝羹</td><td class="likes-cell">143</td><td class="comments-cell">2</td></tr>
+<tr><td class="idx">19</td><td class="title-cell">竹荪虾滑汤</td><td class="likes-cell">114</td><td class="comments-cell">5</td></tr>
+</tbody>
+</table>
+
+<h2 class="section-title">📖 详细菜谱</h2>
+
+<!-- Recipe 1 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">1</div>
+    <div class="card-title">女明星产后快速恢复体力的瘦肉精华汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 10万+</span><span class="comments">💬 1,155</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>猪瘦肉（通脊）— 平价有营养、不燥热、不油腻，温补首选。</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>隔水炖蒸，肉不加水。新鲜通脊可不焯水直接炖，品质一般的肉需焯水去腥降嘌呤。汤是精华，剩下的肉可凉拌食用。</p></div>
+  <div class="section-label">💬 评论区精选</div>
+  <ul class="comment-list">
+    <li>作者：新鲜通脊可不焯水直接炖，汤是精华，肉可做凉拌菜</li>
+    <li>多位用户分享：支原体感染后靠此汤补回来，病后恢复有奇效</li>
+    <li>争议：有人认为蛋白质主要在肉里不在汤里；广东用户表示汤好喝但易长胖</li>
+    <li>作者回复：不坐月子也可按月子的方法补身体</li>
+  </ul>
+  <div class="tags"><span class="tag">月子餐食谱</span><span class="tag">瘦肉汤</span><span class="tag">食疗养生</span><span class="tag">产后恢复</span><span class="tag">坐月子</span><span class="tag">暖胃汤</span></div>
+</div>
+
+<!-- Recipe 2 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">2</div>
+    <div class="card-title">营养月子餐第一周食谱</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 8,133</span><span class="comments">💬 85</span></div>
+  <div class="section-label">🥘 食谱搭配（一锅出）</div>
+  <div class="section-content">
+    <p><strong>瘦肉精华汤：</strong>300g 猪瘦肉（通脊），加开水蒸2小时</p>
+    <p><strong>蒸毛瓜：</strong>1个毛瓜 + 适量虾干，蒸20分钟</p>
+    <p><strong>山药蒸肉饼：</strong>铁棍山药 + 瘦肉 + 1个鸡蛋，蒸20分钟</p>
+  </div>
+  <div class="section-label">💬 评论区精选</div>
+  <ul class="comment-list">
+    <li>用户问：毛瓜太凉？作者回复可食，600ml 汤盅刚好</li>
+    <li>用户问：月子能吃枸杞/胡椒吗？作者回：适量即可</li>
+    <li>用户分享：月嫂第一周不让吃荤腥；医生建议吃肉补充蛋白质</li>
+  </ul>
+  <div class="tags"><span class="tag">营养月子餐</span><span class="tag">第一周食谱</span><span class="tag">喝出好气色</span><span class="tag">产后瘦身</span></div>
+</div>
+
+<!-- Recipe 3 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">3</div>
+    <div class="card-title">夏季滋补月子汤 — 莲藕花生排骨汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 39</span><span class="comments">💬 3</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>排骨适量 · 莲藕适量 · 小无花果 8粒 · 花生 20g（开水泡发） · 黑豆 15g · 蜜枣 2粒</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>大火烧开转小火煲 1.5 小时。第三周后可丰富汤水种类：排骨汤、鱼汤、牛骨汤、鲍鱼汤等等，不要只喝鸡汤。</p></div>
+  <div class="tags"><span class="tag">排骨汤</span><span class="tag">夏季滋补</span><span class="tag">月子汤</span><span class="tag">养生汤</span></div>
+</div>
+
+<!-- Recipe 4 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">4</div>
+    <div class="card-title">孕期食谱：鱿鱼香菇蒸肉饼</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 42</span><span class="comments">💬 2</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>梅花肉（肥瘦比自行选择，推荐 2:8） · 鱿鱼丁 · 香菇丁 · 姜葱水 · 淀粉 · 生抽 · 葱花 · 枸杞</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>肉剁成泥加姜葱水、鱿鱼丁、香菇丁、淀粉、生抽搅拌 → 水开上锅蒸20分钟关火 → 焖5分钟 → 撒葱花枸杞。蒸制清淡少油，适合孕后期和产后第四周。</p></div>
+  <div class="tags"><span class="tag">蒸肉饼</span><span class="tag">孕期饮食</span><span class="tag">低脂低盐</span><span class="tag">万物皆可蒸</span></div>
+</div>
+
+<!-- Recipe 5 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">5</div>
+    <div class="card-title">产后边补边减脂：低卡无油水焖菜</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 81</span><span class="comments">💬 3</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p><strong>蛋白质：</strong>鸡腿肉（可替换鸡胸肉、虾、牛肉） · <strong>蔬菜：</strong>温和低热量蔬菜（西兰花、广东菜心等）</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>全程不到30分钟，无水焖制，清爽不油腻，饱腹感满满。</p></div>
+  <div class="tags"><span class="tag">减脂餐</span><span class="tag">水焖菜</span><span class="tag">低油低盐</span><span class="tag">夏日美食</span></div>
+</div>
+
+<!-- Recipe 6 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">6</div>
+    <div class="card-title">养元气下午茶：木瓜燕窝羹</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 62</span><span class="comments">💬 3</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>木瓜（维C含量是苹果的48倍，温和不寒不燥） · 牛奶 · 燕窝</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>木瓜 + 牛奶 + 燕窝 = 三重滋补。燕窝热量极低几乎没有脂肪，孕期产后吃主打长胎不长肉。</p></div>
+  <div class="tags"><span class="tag">木瓜燕窝</span><span class="tag">下午茶</span><span class="tag">高端月嫂</span><span class="tag">孕期营养</span></div>
+</div>
+
+<!-- Recipe 7 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">7</div>
+    <div class="card-title">产后第三周：山药芡实排骨汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 83</span><span class="comments">💬 5</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>排骨 · 山药 · 莲子 · 百合 · 龙眼肉 · 芡实 · 薏米 · 玉竹 · 枸杞</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>这些食材也可组合给宝妈在第三阶段煮茶喝。喝汤前把汤油撇一下更清爽。</p></div>
+  <div class="tags"><span class="tag">排骨汤</span><span class="tag">食疗养生</span><span class="tag">产后养生</span><span class="tag">科学坐月子</span></div>
+</div>
+
+<!-- Recipe 8 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">8</div>
+    <div class="card-title">产后滋补养生汤 — 干鲍鸡汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 125</span><span class="comments">💬 6</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>半只鸡 · 瘦肉 · 干小鲍 · 党参 · 莲子 · 龙眼肉</p><p>干鲍鱼经过日晒风干脱水，性平偏温补，寒性褪去，比新鲜鲍鱼更适合产后宝妈。</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>煲汤的水要一次加够，中途再加水（哪怕是开水）味道都不一样。汤白味甜食材鲜。</p></div>
+  <div class="section-label">💬 评论区精选</div>
+  <ul class="comment-list">
+    <li>用户问"第四段是第四周吗"，作者确认是的</li>
+    <li>用户询问干小鲍产地</li>
+  </ul>
+  <div class="tags"><span class="tag">食疗养生</span><span class="tag">滋补养生</span><span class="tag">月子汤</span><span class="tag">产后恢复</span></div>
+</div>
+
+<!-- Recipe 9 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">9</div>
+    <div class="card-title">爱美女生产后身材管理：低卡蔬菜鸡肉卷</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 102</span><span class="comments">💬 4</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>鸡腿肉（去骨） · 姜丝 · 盐 · 生抽 · 黄酒 · 蚝油 · 黑胡椒 · 爱吃的蔬菜 · 葱段 · 姜片 · 香叶</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>鸡腿肉去骨加调料腌制30分钟 → 加蔬菜用锡纸裹紧 → 锅中加葱姜香叶煮10分钟焖10分钟 → 冷却后汤汁浸泡1小时（冰箱冷藏更好切）</p><p><strong>黄晓明同款蘸料：</strong>蒜泥、香菜、姜、生抽</p></div>
+  <div class="tags"><span class="tag">减脂餐</span><span class="tag">低卡低脂</span><span class="tag">鸡肉卷</span><span class="tag">产后身材管理</span></div>
+</div>
+
+<!-- Recipe 10 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">10</div>
+    <div class="card-title">女明星产后进补：黄精桑葚鸡蛋茶</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 100</span><span class="comments">💬 3</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>黄精 5g · 桑葚子 10g · 红糖适量 · 鸡蛋 1颗 · 核桃适量（可选核桃粉）</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>加水1000ml 清水煮滚后打入一颗鸡蛋 → 最后加入核桃。喝茶吃鸡蛋。产后第四周饮用，满月后一周喝两次。</p></div>
+  <div class="tags"><span class="tag">黄精</span><span class="tag">月子茶</span><span class="tag">养元气</span><span class="tag">养生茶</span><span class="tag">桑葚干</span></div>
+</div>
+
+<!-- Recipe 11 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">11</div>
+    <div class="card-title">月嫂姐妹上户如何做到井井有条？</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 62</span><span class="comments">💬 4</span></div>
+  <div class="section-label">📝 核心要点</div>
+  <div class="section-content">
+    <p>① 上户后先观察了解宝妈饮食习惯，再定制服务方案，不要盲目照搬</p>
+    <p>② 产后第一周宝妈处于应激状态，顺产和剖腹产不同，按需进食，吃不下就不吃</p>
+    <p>③ 每人体质胃口恢复节奏不同，奶水足的饿得快，一天六顿都吃不够也正常</p>
+  </div>
+  <div class="tags"><span class="tag">高端月嫂</span><span class="tag">月嫂培训</span><span class="tag">科学坐月子</span><span class="tag">女性成长</span></div>
+</div>
+
+<!-- Recipe 12 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">12</div>
+    <div class="card-title">明星月嫂钟姐致所有月嫂姐妹的一封信</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 55</span><span class="comments">💬 9</span></div>
+  <div class="section-content"><p>亲爱的学员们：辛苦了，也谢谢你的坚持。每一次笨拙的练习都是在向专业靠近。高端食材的知识与处理方法，为自己、为家庭开辟新的可能。</p></div>
+  <div class="tags"><span class="tag">月嫂服务</span><span class="tag">女性成长</span><span class="tag">育婴师</span></div>
+</div>
+
+<!-- Recipe 13 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">13</div>
+    <div class="card-title">第四周进补：花胶鸡汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 76</span><span class="comments">💬 10</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>半只鸡 · 瘦肉适量 · 泡发花胶 100g · 龙眼肉 8g · 山药 30g · 莲子 10g</p><p>花胶含丰富胶原蛋白和氨基酸，帮助产后宝妈体力恢复。</p></div>
+  <div class="section-label">💬 评论区精选</div>
+  <ul class="comment-list">
+    <li>用户问花胶怎么去腥？作者回复参考之前视频</li>
+    <li>用户问山药可用新鲜的吗？作者回复可以</li>
+    <li>用户问汤料克数有标准吗？煲汤可以不放盐吗？</li>
+  </ul>
+  <div class="tags"><span class="tag">花胶汤</span><span class="tag">下奶汤</span><span class="tag">产后恢复</span><span class="tag">科学坐月子</span></div>
+</div>
+
+<!-- Recipe 14 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">14</div>
+    <div class="card-title">女明星同款：海参花胶瘦肉水</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 99</span><span class="comments">💬 5</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>瘦肉 150g · 瑶柱 · 龙眼肉 · 泡发花胶 · 泡发海参</p></div>
+  <div class="section-label">⚠ 海参相克食物</div>
+  <div class="section-content">
+    <p><strong>忌酸性水果：</strong>葡萄、山楂、石榴、杨梅、酸菜 — 破坏胶原蛋白结构</p>
+    <p><strong>忌寒凉食材：</strong>苦瓜、冬瓜、螃蟹、绿豆 — 海参温补，搭配会让肚子不舒服</p>
+  </div>
+  <div class="tags"><span class="tag">海参汤</span><span class="tag">花胶汤</span><span class="tag">产后进补</span><span class="tag">月子汤</span></div>
+</div>
+
+<!-- Recipe 15 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">15</div>
+    <div class="card-title">春夏秋冬坐月子指南</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 65</span><span class="comments">💬 6</span></div>
+  <div class="section-label">🍂 四季食补</div>
+  <div class="section-content">
+    <p><strong>春：</strong>清淡少油腻，吃鸡肉、猪肝、山药、茯苓、芡实、薏米。注意防风。</p>
+    <p><strong>夏：</strong>少上火食材，吃鱼肉、冬瓜、丝瓜、百合、莲子、木瓜。补充水分。</p>
+    <p><strong>秋：</strong>润为主！温和进补，养元气不燥热。多吃白色食材：百合、银耳、雪梨。</p>
+    <p><strong>冬：</strong>温补，可适当进补，煲汤为主。</p>
+  </div>
+  <div class="tags"><span class="tag">四季养生</span><span class="tag">坐月子饮食</span><span class="tag">顺应节气</span></div>
+</div>
+
+<!-- Recipe 16 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">16</div>
+    <div class="card-title">女明星产后减脂：低脂冬瓜桑拿鸡</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 162</span><span class="comments">💬 8</span></div>
+  <div class="section-label">🥘 减脂公式</div>
+  <div class="section-content">
+    <p>1拳主食 + 1掌心蛋白质 + 2拳蔬菜 + 1拇指优质脂肪</p>
+    <p><strong>主食：</strong>白米饭/糙米/燕麦（按周数选择）</p>
+    <p><strong>蛋白质：</strong>鸡肉（鸡腿肉更嫩，严格控制可去皮）</p>
+    <p><strong>蔬菜：</strong>口蘑 · 虫草花 · 冬瓜</p>
+  </div>
+  <div class="section-label">💬 评论区精选</div>
+  <ul class="comment-list">
+    <li>用户问蒸制可以替代吗（非产妇也想吃）？作者回复可以</li>
+    <li>作者推广：高端月嫂明星大师班特训，7天精通60+道月子餐</li>
+  </ul>
+  <div class="tags"><span class="tag">桑拿鸡</span><span class="tag">减脂餐</span><span class="tag">懒人一锅蒸</span><span class="tag">科学坐月子</span></div>
+</div>
+
+<!-- Recipe 17 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">17</div>
+    <div class="card-title">月子餐 1-4 周食谱万能公式</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 161</span><span class="comments">💬 4</span></div>
+  <div class="section-label">📅 四周食谱</div>
+  <div class="section-content">
+    <p><strong>第一周：</strong>猪瘦肉、蒸肉饼蒸排骨。蔬菜选西兰花、广东菜心、上海青。焯水/水煮/清炒。不能油、不能太咸、不能补！</p>
+    <p><strong>第二周：</strong>温和食材 — 清鸡汤、牛肉。五指毛桃、芡实、莲子、山药、茯苓、薏米、蜜枣、陈皮煮水煲汤。</p>
+    <p><strong>第三周起：</strong>逐步丰富，加入更多滋补食材。</p>
+    <p><strong>第四周：</strong>进补阶段，花胶、海参、燕窝等高营养食材。</p>
+  </div>
+  <div class="tags"><span class="tag">月子餐食谱</span><span class="tag">万能公式</span><span class="tag">广东靓汤</span><span class="tag">产后恢复</span></div>
+</div>
+
+<!-- Recipe 18 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">18</div>
+    <div class="card-title">产后养元气：低脂南瓜燕窝羹</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 143</span><span class="comments">💬 2</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>南瓜 · 南枣 · 燕窝</p></div>
+  <div class="section-label">🔍 燕窝挑选技巧</div>
+  <div class="section-content">
+    <p>① 看颜色：优质燕窝为米色或浅灰色，很白可能是漂白过的</p>
+    <p>② 看纹理：丝状结构，完整饱满，表面干净</p>
+    <p>③ 闻气味：无异味即可</p>
+  </div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>三种食材简单搭配，胶质满满，口感柔滑，低脂无糖又健康。</p></div>
+  <div class="tags"><span class="tag">燕窝</span><span class="tag">南瓜羹</span><span class="tag">低脂美食</span><span class="tag">下午茶</span></div>
+</div>
+
+<!-- Recipe 19 -->
+<div class="recipe-card">
+  <div class="card-header">
+    <div class="card-num">19</div>
+    <div class="card-title">产后第一碗低脂汤：竹荪虾滑汤</div>
+  </div>
+  <div class="card-stats"><span class="likes">👍 114</span><span class="comments">💬 5</span></div>
+  <div class="section-label">🥘 菜谱原料</div>
+  <div class="section-content"><p>竹荪（泡发修剪） · 虾滑 · 冬瓜 · 金耳 · 清鸡汤 · 红曲米</p></div>
+  <div class="section-label">👩‍🍳 制作方法</div>
+  <div class="section-content"><p>虾滑挤进竹荪中 → 冬瓜水分足热量低 → 金耳胶质丰富 → 清淡不油腻，饱腹感强，虾滑Q弹竹荪脆爽。</p></div>
+  <div class="tags"><span class="tag">竹荪汤</span><span class="tag">虾滑</span><span class="tag">低脂低卡</span><span class="tag">汤鲜味美</span></div>
+</div>
+
+<div class="footer">
+  <p>⚠ 第12条「夏季坐月子的第一碗汤～陈皮螺头冬瓜汤」被小红书风控拦截，未能获取正文。</p>
+  <p style="margin-top:12px;opacity:.6">由 Hermes Agent 通过 OpenCLI 自动抓取 · 2026-06-16</p>
+</div>
+
+</body>
+</html>
