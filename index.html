@@ -121,7 +121,7 @@
   }
   .recipe-card.hidden{display:none}
   .recipe-card .card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-  .recipe-card .card-num{background:var(--accent);color:#fff;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+  .recipe-card .card-num{background:var(--accent);color:#fff;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;scroll-margin-top:168px}
   .recipe-card .card-title{font-size:16px;font-weight:700;line-height:1.4;flex:1}
   .time-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 10px;border-radius:20px;margin-bottom:12px}
   .bg-w1{background:#fdf0ec;color:var(--week-1)}
@@ -161,7 +161,7 @@
 <div class="hero">
   <div class="avatar">🍲</div>
   <h1>明星私厨钟姐</h1>
-  <p class="sub">产后月子餐 · 194 道菜谱 · <span style="font-size:11px;opacity:.6">v2.3</span></p>
+  <p class="sub">产后月子餐 · 194 道菜谱 · <span style="font-size:11px;opacity:.6">v2.4</span></p>
 </div>
 
 <div class="index-wrap">
@@ -177,7 +177,7 @@
 
 <div class="footer">
   <p>数据来源：小红书 @明星私厨钟姐</p>
-  <p>生成时间：2026-06-17 · v2.3 · 194 道菜谱</p>
+  <p>生成时间：2026-06-17 · v2.4 · 194 道菜谱</p>
 </div>
 
 <script>
@@ -204,6 +204,17 @@ function init() {
   applyAllFilters();
   
   document.getElementById('searchInput').addEventListener('input', debounce(applyAllFilters, 200));
+  document.getElementById('indexList').addEventListener('click', e => {
+    const link = e.target.closest('a[href^="#r"]');
+    if (!link) return;
+    e.preventDefault();
+    scrollToRecipe(link.getAttribute('href'));
+  });
+  
+  // Fix initial hash jump after JS-rendered anchors exist
+  requestAnimationFrame(() => {
+    if (location.hash) scrollToRecipe(location.hash, false);
+  });
   
   // Scroll handler
   window.addEventListener('scroll', () => {
@@ -349,6 +360,13 @@ function clearSearch() {
   document.getElementById('searchInput').value = '';
   document.getElementById('clearBtn').classList.remove('visible');
   applyAllFilters();
+}
+
+function scrollToRecipe(hash, updateHash = true) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  target.scrollIntoView({behavior:'smooth', block:'start'});
+  if (updateHash) history.pushState(null, '', hash);
 }
 
 function toggleIndex() {
