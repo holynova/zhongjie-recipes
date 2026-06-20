@@ -28,7 +28,7 @@
   body{
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     color:var(--ink);line-height:1.72;-webkit-font-smoothing:antialiased;
-    max-width:760px;margin:0 auto;padding:224px 18px 48px;
+    max-width:760px;margin:0 auto;padding:176px 18px 48px;
     background:
       radial-gradient(circle at 8% 0%,rgba(200,95,66,.13),transparent 32%),
       radial-gradient(circle at 92% 4%,rgba(102,134,107,.12),transparent 30%),
@@ -70,14 +70,15 @@
   .sort-row span{font-weight:700;color:#8a7a68;flex:0 0 auto}
   .sort-btn{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px}
 
-  .dataset-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:0 0 8px}
-  .dataset-tab{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:16px;padding:8px 8px;cursor:pointer;font-weight:850;font-size:12px;line-height:1.2;text-align:left;box-shadow:0 4px 12px rgba(98,66,34,.05)}
-  .dataset-tab strong{display:block;color:var(--ink);font-size:13px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .dataset-tab span{display:block;font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .dataset-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-color:var(--accent);box-shadow:0 10px 24px rgba(200,95,66,.22)}
+  .dataset-tabs{display:flex;gap:6px;margin:0 0 6px;overflow-x:auto;scrollbar-width:none}
+  .dataset-tabs::-webkit-scrollbar{display:none}
+  .dataset-tab{flex:1 0 auto;min-width:max-content;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:5px 9px;cursor:pointer;font-weight:850;font-size:11px;line-height:1;white-space:nowrap;box-shadow:0 2px 8px rgba(98,66,34,.04)}
+  .dataset-tab strong{display:inline;color:var(--ink);font-size:11px;margin:0 3px 0 0;white-space:nowrap}
+  .dataset-tab span{display:inline;font-size:10px;color:var(--muted);white-space:nowrap}
+  .dataset-tab.active{background:var(--accent);border-color:var(--accent);box-shadow:0 6px 14px rgba(200,95,66,.18)}
   .dataset-tab.active strong,.dataset-tab.active span{color:#fff}
   .source-badge.old{background:#f6ece4;color:#8e3d2f}
-  @media (max-width:520px){.dataset-tabs{grid-template-columns:1fr}.dataset-tab{text-align:center}.dataset-tab strong,.dataset-tab span{white-space:normal}}
+  @media (max-width:520px){.dataset-tabs{gap:5px}.dataset-tab{padding:5px 8px;font-size:10px}.dataset-tab strong{font-size:10px}.dataset-tab span{font-size:9px}}
 
   .hero{position:relative;text-align:left;padding:34px 2px 16px}
   .hero::before{content:"";position:absolute;right:4px;top:18px;width:118px;height:118px;border-radius:38px;background:linear-gradient(135deg,rgba(200,95,66,.16),rgba(102,134,107,.12));transform:rotate(8deg);z-index:0}
@@ -134,7 +135,7 @@
   .back-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;background:var(--accent);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 12px 28px rgba(200,95,66,.28);opacity:0;transform:translateY(20px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:100;display:grid;place-items:center}
   .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
   .footer{text-align:center;padding:34px 0 20px;color:var(--muted);font-size:12px}
-  @media (max-width:520px){body{padding:292px 14px 40px}.toolbar{border-radius:0 0 18px 18px}.hero h1{font-size:27px}.hero-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.stat-card{padding:10px 8px}.summary-panel{grid-template-columns:1fr}.summary-panel .summary-note{text-align:left}.recipe-card{padding:14px;border-radius:20px}.recipe-card .card-title{font-size:15px}.meta-row{margin-left:0}.section-head{align-items:center}}
+  @media (max-width:520px){body{padding:182px 14px 40px}.toolbar{border-radius:0 0 18px 18px}.hero h1{font-size:27px}.hero-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.stat-card{padding:10px 8px}.summary-panel{grid-template-columns:1fr}.summary-panel .summary-note{text-align:left}.recipe-card{padding:14px;border-radius:20px}.recipe-card .card-title{font-size:15px}.meta-row{margin-left:0}.section-head{align-items:center}}
 </style>
 </head>
 <body>
@@ -147,9 +148,9 @@
   </div>
   <div class="result-count" id="resultCount"></div>
   <div class="dataset-tabs" id="datasetTabs" aria-label="数据集切换">
-    <button class="dataset-tab active" data-dataset="all" onclick="setDataset('all', this)"><strong>全部数据</strong><span>248 道</span></button>
-    <button class="dataset-tab" data-dataset="top200" onclick="setDataset('top200', this)"><strong>之前前200条</strong><span>194 道</span></button>
-    <button class="dataset-tab" data-dataset="older_2023_12_14_before" onclick="setDataset('older_2023_12_14_before', this)"><strong>新增老帖</strong><span>54 道</span></button>
+    <button class="dataset-tab active" data-dataset="all" onclick="setDataset('all', this)"><strong>全部</strong><span>248</span></button>
+    <button class="dataset-tab" data-dataset="top200" onclick="setDataset('top200', this)"><strong>前200</strong><span>194</span></button>
+    <button class="dataset-tab" data-dataset="older_2023_12_14_before" onclick="setDataset('older_2023_12_14_before', this)"><strong>老帖</strong><span>54</span></button>
   </div>
   <div class="filter-tags" id="filterTags" aria-label="阶段筛选"></div>
   <div class="sort-row" aria-label="排序方式">
