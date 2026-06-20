@@ -3,208 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>明星私厨钟姐 — 月子餐菜谱 · 248道</title>
+<title>明星私厨钟姐 — 菜谱文档 · 248道</title>
 <style>
   :root {
-    --bg:#f7f4ed;
-    --bg-2:#fffaf1;
-    --card:#fffdf8;
-    --ink:#252018;
-    --muted:#776b5d;
-    --line:#eadfce;
-    --accent:#c85f42;
-    --accent-dark:#8e3d2f;
-    --accent-soft:#fff0e7;
-    --green:#66866b;
-    --shadow:0 18px 45px rgba(98,66,34,.10),0 3px 12px rgba(98,66,34,.06);
-    --week-1:#d86f58;
-    --week-2:#d98b38;
-    --week-3:#a77b34;
-    --week-4:#765b3e;
-    --general:#66866b;
+    --vp-c-brand:#42b883;
+    --vp-c-brand-dark:#338a60;
+    --vp-c-text-1:#2c3e50;
+    --vp-c-text-2:#476582;
+    --vp-c-text-3:#6b7280;
+    --vp-c-bg:#ffffff;
+    --vp-c-bg-alt:#f6f6f7;
+    --vp-c-bg-soft:#f9f9fa;
+    --vp-c-border:#e2e2e3;
+    --vp-c-navy:#35495e;
+    --vp-code-bg:#202024;
+    --vp-radius:8px;
+    --header-h:112px;
+    color-scheme:light;
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;background:var(--bg)}
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--vp-c-bg)}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    color:var(--ink);line-height:1.72;-webkit-font-smoothing:antialiased;
-    max-width:760px;margin:0 auto;padding:176px 18px 48px;
-    background:
-      radial-gradient(circle at 8% 0%,rgba(200,95,66,.13),transparent 32%),
-      radial-gradient(circle at 92% 4%,rgba(102,134,107,.12),transparent 30%),
-      linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 34%,#f8f3ea 100%);
-    min-height:100vh;
+    margin:0;
+    padding:var(--header-h) 0 56px;
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--vp-c-text-1);
+    background:var(--vp-c-bg);
+    line-height:1.6;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
   }
   button,input{font:inherit}
   button{touch-action:manipulation}
+  code,.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  a{color:var(--vp-c-brand-dark);text-decoration:none}
+  a:hover{color:var(--vp-c-brand)}
 
-  .toolbar{
-    position:fixed;top:0;left:0;right:0;z-index:200;max-width:760px;margin:0 auto;
-    padding:10px 14px 9px;background:rgba(255,251,244,.88);
-    border:1px solid rgba(234,223,206,.88);border-top:0;border-radius:0 0 22px 22px;
-    box-shadow:0 12px 32px rgba(85,58,31,.10);backdrop-filter:blur(18px) saturate(145%);
-    -webkit-backdrop-filter:blur(18px) saturate(145%);
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    border-bottom:1px solid var(--vp-c-border);
+    backdrop-filter:saturate(180%) blur(18px);
+    -webkit-backdrop-filter:saturate(180%) blur(18px);
   }
-  .search-wrap{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-  .search-wrap input{
-    flex:1;min-width:0;padding:11px 14px;border:1px solid var(--line);border-radius:16px;
-    background:#fff;color:var(--ink);font-size:15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
-    transition:border-color .18s,box-shadow .18s,transform .18s;
+  .topbar-inner{max-width:1184px;margin:0 auto;padding:10px 16px 9px}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .brand{display:flex;align-items:center;gap:9px;min-width:0;font-size:14px;font-weight:700;color:var(--vp-c-navy)}
+  .logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--vp-c-brand),#8ee6bd);display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;flex:0 0 auto}
+  .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .version-badge{font-size:11px;font-weight:700;color:var(--vp-c-brand-dark);background:#f0f9eb;border:1px solid rgba(66,184,131,.28);border-radius:999px;padding:3px 8px;white-space:nowrap}
+  .control-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .search-line{display:flex;gap:7px;align-items:center}
+  #searchInput{
+    width:100%;height:34px;border:1px solid var(--vp-c-border);border-radius:8px;background:var(--vp-c-bg-alt);
+    color:var(--vp-c-text-1);outline:none;padding:0 11px;font-size:14px;
+    transition:border-color .15s,background .15s,box-shadow .15s;
   }
-  .search-wrap input:focus{border-color:rgba(200,95,66,.65);box-shadow:0 0 0 4px rgba(200,95,66,.12);transform:translateY(-1px)}
-  .clear-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--muted);font-size:17px;cursor:pointer;display:none}
+  #searchInput:focus{background:#fff;border-color:var(--vp-c-brand);box-shadow:0 0 0 3px rgba(66,184,131,.14)}
+  .clear-btn{width:34px;height:34px;border:1px solid var(--vp-c-border);border-radius:8px;background:#fff;color:var(--vp-c-text-3);display:none;cursor:pointer}
   .clear-btn.visible{display:grid;place-items:center}
-  .result-count{font-size:12px;color:var(--muted);padding:0 2px 6px;display:none}
-  .result-count.visible{display:block}
-  .filter-tags{display:flex;gap:7px;overflow-x:auto;padding:1px 0 7px;scrollbar-width:none}
-  .filter-tags::-webkit-scrollbar{display:none}
-  .filter-tag,.sort-btn,.quick-chip,.collapse-all-btn{
-    border:1px solid var(--line);background:rgba(255,255,255,.9);color:var(--muted);cursor:pointer;
-    transition:transform .16s,background .16s,border-color .16s,color .16s;white-space:nowrap;user-select:none;
+  .pill-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .pill-row::-webkit-scrollbar{display:none}
+  .dataset-tab,.filter-tag,.sort-btn,.quick-chip,.collapse-all-btn,.expand-btn{
+    border:1px solid var(--vp-c-border);background:#fff;color:var(--vp-c-text-2);border-radius:8px;cursor:pointer;
+    font-size:12px;font-weight:600;line-height:1;white-space:nowrap;transition:background .15s,border-color .15s,color .15s;
   }
-  .filter-tag{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
-  .filter-tag:hover,.sort-btn:hover,.quick-chip:hover,.collapse-all-btn:hover{background:var(--accent-soft);transform:translateY(-1px)}
-  .filter-tag.active,.sort-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 8px 18px rgba(200,95,66,.22)}
-  .sort-row{display:flex;gap:7px;align-items:center;overflow-x:auto;font-size:12px;color:var(--muted);scrollbar-width:none}
+  .dataset-tab{padding:7px 9px;display:inline-flex;align-items:center;gap:4px}
+  .dataset-tab strong{font-size:12px;color:inherit}
+  .dataset-tab span{font-size:11px;opacity:.78}
+  .filter-tag,.sort-btn{padding:7px 9px}
+  .dataset-tab:hover,.filter-tag:hover,.sort-btn:hover,.quick-chip:hover,.collapse-all-btn:hover,.expand-btn:hover{border-color:rgba(66,184,131,.55);color:var(--vp-c-brand-dark);background:#f0f9eb}
+  .dataset-tab.active,.filter-tag.active,.sort-btn.active{border-color:var(--vp-c-brand);background:var(--vp-c-brand);color:#fff}
+  .sort-row{display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none}
   .sort-row::-webkit-scrollbar{display:none}
-  .sort-row span{font-weight:700;color:#8a7a68;flex:0 0 auto}
-  .sort-btn{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px}
+  .sort-row .label{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--vp-c-text-3);flex:0 0 auto}
+  .result-count{display:none;font-size:12px;color:var(--vp-c-text-3)}
+  .result-count.visible{display:block}
 
-  .dataset-tabs{display:flex;gap:6px;margin:0 0 6px;overflow-x:auto;scrollbar-width:none}
-  .dataset-tabs::-webkit-scrollbar{display:none}
-  .dataset-tab{flex:1 0 auto;min-width:max-content;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:5px 9px;cursor:pointer;font-weight:850;font-size:11px;line-height:1;white-space:nowrap;box-shadow:0 2px 8px rgba(98,66,34,.04)}
-  .dataset-tab strong{display:inline;color:var(--ink);font-size:11px;margin:0 3px 0 0;white-space:nowrap}
-  .dataset-tab span{display:inline;font-size:10px;color:var(--muted);white-space:nowrap}
-  .dataset-tab.active{background:var(--accent);border-color:var(--accent);box-shadow:0 6px 14px rgba(200,95,66,.18)}
-  .dataset-tab.active strong,.dataset-tab.active span{color:#fff}
-  .source-badge.old{background:#f6ece4;color:#8e3d2f}
-  @media (max-width:520px){.dataset-tabs{gap:5px}.dataset-tab{padding:5px 8px;font-size:10px}.dataset-tab strong{font-size:10px}.dataset-tab span{font-size:9px}}
+  .page{max-width:1184px;margin:0 auto;padding:0 16px;display:block}
+  .main{min-width:0}
+  .hero{padding:30px 0 18px;border-bottom:1px solid var(--vp-c-border)}
+  .eyebrow{display:inline-flex;align-items:center;gap:6px;color:var(--vp-c-brand-dark);font-size:13px;font-weight:700;margin-bottom:10px}
+  .hero h1{margin:0;color:var(--vp-c-text-1);font-size:36px;line-height:1.18;font-weight:700;letter-spacing:-.02em}
+  .hero .sub{margin:12px 0 0;color:var(--vp-c-text-2);font-size:16px;max-width:660px}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}
+  .stat{background:var(--vp-c-bg-alt);border:1px solid var(--vp-c-border);border-radius:12px;padding:12px 10px}
+  .stat strong{display:block;font-size:20px;line-height:1.1;color:var(--vp-c-navy)}
+  .stat span{display:block;margin-top:5px;font-size:12px;color:var(--vp-c-text-3)}
 
-  .hero{position:relative;text-align:left;padding:34px 2px 16px}
-  .hero::before{content:"";position:absolute;right:4px;top:18px;width:118px;height:118px;border-radius:38px;background:linear-gradient(135deg,rgba(200,95,66,.16),rgba(102,134,107,.12));transform:rotate(8deg);z-index:0}
-  .hero .avatar{position:relative;z-index:1;width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#fff 0%,#ffe6d8 48%,#d16a4b 100%);display:grid;place-items:center;font-size:26px;box-shadow:var(--shadow);margin-bottom:13px}
-  .hero h1{position:relative;z-index:1;font-size:30px;line-height:1.12;font-weight:850;letter-spacing:-.04em;color:var(--ink)}
-  .hero .sub{position:relative;z-index:1;font-size:13px;color:var(--muted);margin-top:8px;max-width:28em}
-  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
-  .stat-card{background:rgba(255,253,248,.74);border:1px solid var(--line);border-radius:18px;padding:12px 10px;box-shadow:0 8px 20px rgba(98,66,34,.06)}
-  .stat-card strong{display:block;font-size:18px;line-height:1;color:var(--accent-dark)}
-  .stat-card span{display:block;margin-top:6px;font-size:11px;color:var(--muted)}
-  .quick-actions{display:flex;gap:8px;overflow-x:auto;margin:4px 0 18px;padding-bottom:2px;scrollbar-width:none}
+  .custom-block{margin:20px 0;padding:16px 18px;border-radius:8px;border-left:4px solid var(--vp-c-brand);background:#f0f9eb;color:var(--vp-c-text-1)}
+  .custom-block-title{margin:0 0 6px;font-size:13px;font-weight:700;color:var(--vp-c-brand-dark)}
+  .custom-block p:last-child{margin-bottom:0}
+  .warning{border-left-color:#e7c000;background:#fffdf4}
+  .warning .custom-block-title{color:#8a6d00}
+
+  h2{margin:36px 0 14px;padding-top:8px;font-size:24px;line-height:1.25;font-weight:600;letter-spacing:-.01em;color:var(--vp-c-text-1);scroll-margin-top:132px}
+  h3{margin:0;font-size:19px;line-height:1.3;font-weight:600;color:var(--vp-c-text-1)}
+  .section-lead{margin:0 0 14px;color:var(--vp-c-text-2)}
+  .quick-actions{display:flex;gap:8px;overflow-x:auto;margin:16px 0 6px;padding-bottom:2px;scrollbar-width:none}
   .quick-actions::-webkit-scrollbar{display:none}
-  .quick-chip{font-size:13px;font-weight:800;border-radius:16px;padding:9px 12px;box-shadow:0 4px 12px rgba(98,66,34,.05)}
-  .summary-panel{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;background:linear-gradient(135deg,#fffdf8,#fff3e8);border:1px solid var(--line);border-radius:22px;padding:14px;margin:10px 0 18px;box-shadow:var(--shadow)}
-  .summary-panel strong{display:block;font-size:20px;letter-spacing:-.03em;color:var(--accent-dark)}
-  .summary-panel span{font-size:12px;color:var(--muted)}
-  .summary-panel .summary-note{align-self:center;text-align:right;font-size:12px;color:var(--muted)}
+  .quick-chip{padding:8px 10px;background:var(--vp-c-bg-alt)}
 
-  .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 12px}
-  .section-title{font-size:18px;font-weight:850;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:8px}
-  .section-title::after{content:"";display:block;width:34px;height:3px;border-radius:99px;background:var(--accent);margin-left:2px}
-  .index-wrap{margin-bottom:18px}
-  .index-list{list-style:none;padding:0;background:rgba(255,253,248,.72);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 8px 20px rgba(98,66,34,.05)}
-  .index-list li{padding:10px 12px;border-bottom:1px solid rgba(234,223,206,.75);display:flex;align-items:center;gap:10px;font-size:14px}
-  .index-list li:last-child{border-bottom:none}
-  .index-list .idx{width:25px;height:25px;background:#fff3e8;color:var(--accent-dark);border:1px solid #f0d7c8;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:850;flex-shrink:0}
-  .index-list a{color:var(--ink);text-decoration:none;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .idx-badge,.time-badge{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;flex-shrink:0}
-  .idx-badge.w1,.bg-w1{background:#fff0ec;color:var(--week-1)}
-  .idx-badge.w2,.bg-w2{background:#fff6e9;color:var(--week-2)}
-  .idx-badge.w3,.bg-w3{background:#fff8e8;color:var(--week-3)}
-  .idx-badge.w4,.bg-w4{background:#f3ece3;color:var(--week-4)}
-  .idx-badge.gen,.bg-gen{background:#edf5ef;color:var(--general)}
+  .doc-table-wrap{border:1px solid var(--vp-c-border);border-radius:12px;overflow:hidden;background:#fff;margin:10px 0 20px}
+  .doc-table{width:100%;border-collapse:collapse;font-size:13px}
+  .doc-table th,.doc-table td{padding:10px 12px;border-bottom:1px solid var(--vp-c-border);text-align:left;vertical-align:top}
+  .doc-table th{background:var(--vp-c-bg-alt);font-size:13px;font-weight:600;color:var(--vp-c-navy)}
+  .doc-table tr:last-child td{border-bottom:0}
+  .doc-table button{padding:6px 8px}
+
+  .index-wrap{margin:0 0 22px}
+  .index-list{list-style:none;padding:0;margin:0;border:1px solid var(--vp-c-border);border-radius:12px;overflow:hidden;background:#fff}
+  .index-list li{display:flex;gap:9px;align-items:center;padding:9px 11px;border-bottom:1px solid var(--vp-c-border);font-size:14px}
+  .index-list li:last-child{border-bottom:0}
   .index-list li.hidden,.recipe-card.hidden{display:none}
-  .expand-btn,.collapse-all-btn{display:block;width:100%;padding:10px;margin-top:10px;border-radius:16px;font-size:13px;font-weight:800;color:var(--accent-dark);text-align:center}
-  .expand-btn{background:rgba(255,253,248,.8);border-style:dashed}
-  .collapse-all-btn{width:auto;margin:0;padding:8px 11px}
+  .idx{width:28px;height:22px;border-radius:6px;background:var(--vp-c-bg-alt);color:var(--vp-c-text-3);font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:11px;display:grid;place-items:center;flex:0 0 auto}
+  .index-list a{color:var(--vp-c-text-1);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .idx-badge,.time-badge{font-size:11px;font-weight:600;line-height:1;border-radius:4px;padding:4px 6px;background:var(--vp-c-bg-alt);color:var(--vp-c-text-2);white-space:nowrap;flex:0 0 auto}
+  .bg-w1,.idx-badge.w1{background:#f0f9eb;color:var(--vp-c-brand-dark)}
+  .bg-w2,.idx-badge.w2{background:#fffdf4;color:#8a6d00}
+  .bg-w3,.idx-badge.w3{background:#edf7ff;color:#2563a8}
+  .bg-w4,.idx-badge.w4{background:#fdf3f3;color:#b42318}
+  .bg-gen,.idx-badge.gen{background:var(--vp-c-bg-alt);color:var(--vp-c-text-2)}
+  .source-badge.old{background:#f0f9eb;color:var(--vp-c-brand-dark)}
+  .expand-btn,.collapse-all-btn{padding:9px 10px;margin-top:10px;width:100%;background:var(--vp-c-bg-alt);color:var(--vp-c-text-2)}
+  .collapse-all-btn{width:auto;margin:0}
 
-  .recipe-card{background:rgba(255,253,248,.94);border-radius:24px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .18s,box-shadow .18s}
-  .recipe-card:hover{transform:translateY(-1px);box-shadow:0 24px 55px rgba(98,66,34,.12),0 4px 14px rgba(98,66,34,.07)}
-  .recipe-card .card-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;cursor:pointer}
-  .recipe-card .card-num{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;width:30px;height:30px;border-radius:11px;display:grid;place-items:center;font-size:13px;font-weight:850;scroll-margin-top:184px}
-  .recipe-card .card-title{font-size:16px;font-weight:850;line-height:1.42;letter-spacing:-.015em}
-  .toggle-card{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:50%;color:var(--accent-dark);font-weight:900;cursor:pointer;transition:transform .18s}
+  .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:34px 0 14px}
+  .recipe-list{display:grid;gap:12px}
+  .recipe-card{border:1px solid var(--vp-c-border);border-radius:12px;background:#fff;overflow:hidden;scroll-margin-top:132px}
+  .recipe-card .card-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;background:#fff}
+  .recipe-card .card-num{width:32px;height:26px;border-radius:6px;background:var(--vp-c-bg-alt);color:var(--vp-c-brand-dark);font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12px;font-weight:700;display:grid;place-items:center;scroll-margin-top:132px}
+  .recipe-card .card-title{font-size:16px;font-weight:600;line-height:1.42;color:var(--vp-c-text-1)}
+  .toggle-card{width:28px;height:28px;border:1px solid var(--vp-c-border);border-radius:8px;background:var(--vp-c-bg-alt);color:var(--vp-c-text-2);display:grid;place-items:center;transition:transform .16s}
   .recipe-card.collapsed .toggle-card{transform:rotate(-90deg)}
-  .meta-row{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 2px 41px}
-  .card-body{overflow:hidden;transition:max-height .22s ease,opacity .18s ease;margin-top:10px}
-  .recipe-card.collapsed .card-body{max-height:0;opacity:0;margin-top:0}
-  .section-label{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--accent-dark);margin:14px 0 6px}
-  .section-content{font-size:14px;color:var(--ink);line-height:1.9;background:#fffaf3;border:1px solid rgba(234,223,206,.72);border-radius:16px;padding:10px 12px;margin-bottom:7px}
-  .method-steps{counter-reset:step;list-style:none;padding:0;display:grid;gap:8px}
-  .method-steps li{counter-increment:step;padding:9px 11px 9px 38px;position:relative;font-size:14px;line-height:1.7;background:#fffaf3;border:1px solid rgba(234,223,206,.72);border-radius:16px}
-  .method-steps li::before{content:counter(step);position:absolute;left:11px;top:11px;width:20px;height:20px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:850;display:grid;place-items:center}
-  .back-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;background:var(--accent);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 12px 28px rgba(200,95,66,.28);opacity:0;transform:translateY(20px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:100;display:grid;place-items:center}
-  .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
-  .footer{text-align:center;padding:34px 0 20px;color:var(--muted);font-size:12px}
-  @media (max-width:520px){body{padding:182px 14px 40px}.toolbar{border-radius:0 0 18px 18px}.hero h1{font-size:27px}.hero-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.stat-card{padding:10px 8px}.summary-panel{grid-template-columns:1fr}.summary-panel .summary-note{text-align:left}.recipe-card{padding:14px;border-radius:20px}.recipe-card .card-title{font-size:15px}.meta-row{margin-left:0}.section-head{align-items:center}}
+  .meta-row{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px 56px}
+  .card-body{border-top:1px solid var(--vp-c-border);padding:12px 14px 15px;background:#fff;transition:max-height .18s ease,opacity .15s ease}
+  .recipe-card.collapsed .card-body{max-height:0;opacity:0;padding-top:0;padding-bottom:0;border-top:0;overflow:hidden}
+  .section-label{margin:4px 0 8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vp-c-brand-dark)}
+  .section-content{margin:0 0 8px;padding:10px 12px;border-left:4px solid var(--vp-c-brand);background:#f0f9eb;border-radius:8px;color:var(--vp-c-text-1);font-size:14px}
+  .method-steps{counter-reset:step;list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .method-steps li{counter-increment:step;position:relative;padding:9px 11px 9px 38px;border-radius:8px;background:var(--vp-c-bg-alt);font-size:14px}
+  .method-steps li::before{content:counter(step);position:absolute;left:11px;top:10px;width:20px;height:20px;border-radius:50%;background:var(--vp-c-brand);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+  .empty-state{display:none;border:1px dashed var(--vp-c-border);border-radius:12px;padding:24px;text-align:center;color:var(--vp-c-text-3);background:var(--vp-c-bg-alt)}
+  .empty-state.visible{display:block}
+
+  .outline{display:none}
+  .back-top{position:fixed;right:18px;bottom:22px;width:42px;height:42px;border:1px solid var(--vp-c-border);border-radius:50%;background:#fff;color:var(--vp-c-brand-dark);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.08);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .18s,transform .18s;z-index:40}
+  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .footer{border-top:1px solid var(--vp-c-border);margin-top:42px;padding:20px 0;color:var(--vp-c-text-3);font-size:13px}
+
+  @media (min-width:720px){
+    :root{--header-h:116px}
+    .control-grid{grid-template-columns:minmax(260px,1fr) auto;align-items:center}
+    .filter-tags{grid-column:1 / -1}
+    .hero{padding-top:44px}
+    .hero h1{font-size:38px}
+    .stats{grid-template-columns:repeat(3,160px)}
+    .recipe-list{gap:14px}
+  }
+  @media (min-width:1040px){
+    .page{display:grid;grid-template-columns:minmax(0,1fr) 224px;gap:48px}
+    .outline{display:block;position:sticky;top:calc(var(--header-h) + 24px);align-self:start;border-left:1px solid var(--vp-c-border);padding-left:16px;max-height:calc(100vh - var(--header-h) - 48px);overflow:auto}
+    .outline-title{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--vp-c-text-3);margin:0 0 10px;text-transform:uppercase}
+    .outline a{display:block;color:var(--vp-c-text-3);font-size:13px;line-height:1.35;padding:6px 0}
+    .outline a:hover,.outline a.active{color:var(--vp-c-brand-dark)}
+  }
+  @media (max-width:430px){
+    :root{--header-h:124px}
+    .topbar-inner{padding:8px 12px}
+    .brand-row{margin-bottom:7px}
+    .brand{font-size:13px}
+    #searchInput{height:32px;font-size:13px}
+    .clear-btn{width:32px;height:32px}
+    .sort-btn,.filter-tag,.dataset-tab{font-size:11px;padding:6px 8px}
+    .hero h1{font-size:31px}
+    .hero .sub{font-size:15px}
+    .stats{gap:6px}
+    .stat{padding:10px 8px}
+    .stat strong{font-size:18px}
+    .stat span{font-size:11px}
+    .doc-table th,.doc-table td{padding:8px 9px}
+    .recipe-card .card-header{padding:12px}
+    .meta-row{padding-left:12px}
+  }
 </style>
 </head>
 <body>
-
-<!-- Sticky Toolbar -->
-<div class="toolbar" id="toolbar">
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="搜索菜谱、原料、阶段" autocomplete="off">
-    <button class="clear-btn" id="clearBtn" onclick="clearSearch()" aria-label="清除搜索">✕</button>
-  </div>
-  <div class="result-count" id="resultCount"></div>
-  <div class="dataset-tabs" id="datasetTabs" aria-label="数据集切换">
-    <button class="dataset-tab active" data-dataset="all" onclick="setDataset('all', this)"><strong>全部</strong><span>248</span></button>
-    <button class="dataset-tab" data-dataset="top200" onclick="setDataset('top200', this)"><strong>前200</strong><span>194</span></button>
-    <button class="dataset-tab" data-dataset="older_2023_12_14_before" onclick="setDataset('older_2023_12_14_before', this)"><strong>老帖</strong><span>54</span></button>
-  </div>
-  <div class="filter-tags" id="filterTags" aria-label="阶段筛选"></div>
-  <div class="sort-row" aria-label="排序方式">
-    <span>排序</span>
-    <button class="sort-btn active" data-sort="date" onclick="setSort('date', this)">发帖时间倒序</button>
-    <button class="sort-btn" data-sort="likes" onclick="setSort('likes', this)">点赞最多</button>
-    <button class="sort-btn" data-sort="stage" onclick="setSort('stage', this)">按阶段</button>
-  </div>
-</div>
-
-<header class="hero">
-  <div class="avatar">🍲</div>
-  <h1>明星私厨钟姐</h1>
-  <p class="sub">248 道产后月子餐、孕期与养生食谱。包含前 200 条已整理数据 + 2023-12-14 及更早新增老帖。</p>
-  <div class="hero-stats" aria-label="菜谱概览">
-    <div class="stat-card"><strong>248</strong><span>道菜谱</span></div>
-    <div class="stat-card"><strong>9</strong><span>阶段标签</span></div>
-    <div class="stat-card"><strong>新到旧</strong><span>默认排序</span></div>
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <div class="brand-row">
+      <div class="brand"><div class="logo">V</div><span>明星私厨钟姐 · Recipe Docs</span></div>
+      <div class="version-badge">v4.0 · 248 道</div>
+    </div>
+    <div class="control-grid">
+      <div class="search-line">
+        <input type="text" id="searchInput" placeholder="搜索菜谱、原料、阶段" autocomplete="off">
+        <button class="clear-btn" id="clearBtn" onclick="clearSearch()" aria-label="清除搜索">×</button>
+      </div>
+      <div class="sort-row" aria-label="排序方式">
+        <span class="label">排序</span>
+        <button class="sort-btn active" data-sort="date" onclick="setSort('date', this)">时间</button>
+        <button class="sort-btn" data-sort="likes" onclick="setSort('likes', this)">点赞</button>
+        <button class="sort-btn" data-sort="stage" onclick="setSort('stage', this)">阶段</button>
+      </div>
+      <div class="pill-row filter-tags" id="filterTags" aria-label="阶段筛选"></div>
+    </div>
   </div>
 </header>
 
-<div class="quick-actions" id="quickActions" aria-label="快捷入口">
-  <button class="quick-chip" onclick="quickPreset('全部')">全部菜谱</button>
-  <button class="quick-chip" onclick="quickPreset('第一周')">第一周恢复</button>
-  <button class="quick-chip" onclick="quickPreset('孕期')">孕期食谱</button>
-  <button class="quick-chip" onclick="quickPreset('养生')">养生甜汤</button>
-  <button class="quick-chip" onclick="quickPreset('减脂')">减脂餐</button>
-</div>
+<div class="page">
+  <main class="main">
+    <section class="hero" id="overview">
+      <div class="eyebrow">● Vue Docs Style · 移动端优先</div>
+      <h1>明星私厨钟姐菜谱文档</h1>
+      <p class="sub">以 VitePress 文档阅读体验重写：轻量导航、语义化标签、可搜索目录，以及按数据批次切换的 248 道月子餐、孕期与养生食谱。</p>
+      <div class="stats" aria-label="菜谱概览">
+        <div class="stat"><strong>248</strong><span>总菜谱</span></div>
+        <div class="stat"><strong>194</strong><span>前 200 条整理</span></div>
+        <div class="stat"><strong>54</strong><span>新增老帖</span></div>
+      </div>
+    </section>
 
-<section class="summary-panel" id="summaryPanel" aria-live="polite">
-  <div><strong id="summaryCount">248 道菜谱</strong><span id="summaryMeta">全部数据 · 按发帖时间倒序显示</span></div>
-  <div class="summary-note" id="summaryNote">搜索、筛选、排序会同步更新目录和菜谱卡片</div>
-</section>
+    <section id="data-switch">
+      <h2>数据集</h2>
+      <p class="section-lead">切换不同数据批次，搜索、阶段筛选和排序会同步作用于当前数据集。</p>
+      <div class="doc-table-wrap">
+        <table class="doc-table" aria-label="数据集切换表">
+          <thead><tr><th>数据集</th><th>数量</th><th>范围</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td><strong>全部数据</strong></td><td>248</td><td>合并去重后的全部菜谱</td><td><button class="dataset-tab active" data-dataset="all" onclick="setDataset('all', this)"><strong>查看全部</strong></button></td></tr>
+            <tr><td><strong>前 200 条</strong></td><td>194</td><td>之前已经整理到网站的内容</td><td><button class="dataset-tab" data-dataset="top200" onclick="setDataset('top200', this)"><strong>查看前200</strong></button></td></tr>
+            <tr><td><strong>新增老帖</strong></td><td>54</td><td>2023-12-14 及更早老帖</td><td><button class="dataset-tab" data-dataset="older_2023_12_14_before" onclick="setDataset('older_2023_12_14_before', this)"><strong>查看老帖</strong></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="custom-block tip">
+        <p class="custom-block-title">提示</p>
+        <p id="summaryNote">默认显示全部数据，按发帖时间倒序排列。点击任意菜谱标题可展开/收起详情。</p>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+    </section>
 
-<div class="index-wrap">
-  <div class="section-head">
-    <h2 class="section-title">菜谱提纲</h2>
-  </div>
-  <ol class="index-list" id="indexList"></ol>
-  <button class="expand-btn" id="expandBtn" onclick="toggleIndex()">展开全部 248 道 ▾</button>
-</div>
+    <section id="quick-nav">
+      <h2>快捷入口</h2>
+      <div class="quick-actions" id="quickActions" aria-label="快捷入口">
+        <button class="quick-chip" onclick="quickPreset('全部')">全部菜谱</button>
+        <button class="quick-chip" onclick="quickPreset('第一周')">第一周恢复</button>
+        <button class="quick-chip" onclick="quickPreset('孕期')">孕期食谱</button>
+        <button class="quick-chip" onclick="quickPreset('养生')">养生甜汤</button>
+        <button class="quick-chip" onclick="quickPreset('减脂')">减脂餐</button>
+      </div>
+    </section>
 
-<div class="section-head" style="margin-top:32px">
-  <h2 class="section-title">详细菜谱</h2>
-  <button class="collapse-all-btn" id="collapseAllBtn" onclick="toggleAllCards()">收起全部</button>
+    <section class="index-wrap" id="catalog">
+      <h2>菜谱目录</h2>
+      <p class="section-lead" id="summaryMeta">全部数据 · 全部阶段 · 发帖时间倒序</p>
+      <ol class="index-list" id="indexList"></ol>
+      <button class="expand-btn" id="expandBtn" onclick="toggleIndex()">展开全部 248 道 ▾</button>
+    </section>
+
+    <section id="recipes">
+      <div class="section-head">
+        <div>
+          <h2 style="margin:0;padding-top:0">详细菜谱</h2>
+          <p class="section-lead" id="summaryCount" style="margin:6px 0 0">248 道菜谱</p>
+        </div>
+        <button class="collapse-all-btn" id="collapseAllBtn" onclick="toggleAllCards()">收起全部</button>
+      </div>
+      <div class="empty-state" id="emptyState">没有找到匹配的菜谱，试试清空搜索或切换阶段。</div>
+      <div class="recipe-list" id="recipeContainer"></div>
+    </section>
+
+    <footer class="footer">
+      <p>数据来源：小红书 @明星私厨钟姐 · OpenCLI 抓取整理</p>
+      <p>生成时间：2026-06-20 · v4.0 · Vue.js / VitePress documentation style</p>
+    </footer>
+  </main>
+
+  <aside class="outline" aria-label="本页目录">
+    <p class="outline-title">本页目录</p>
+    <a href="#overview">概览</a>
+    <a href="#data-switch">数据集</a>
+    <a href="#quick-nav">快捷入口</a>
+    <a href="#catalog">菜谱目录</a>
+    <a href="#recipes">详细菜谱</a>
+  </aside>
 </div>
-<div id="recipeContainer"></div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
-
-<div class="footer">
-  <p>数据来源：小红书 @明星私厨钟姐</p>
-  <p>生成时间：2026-06-17 · v3.0 · 248 道菜谱 · 新增老帖 54 道</p>
-</div>
 
 <script>
 // ── Recipe Data ──
@@ -216,191 +302,126 @@ let activeSort = 'date';
 let activeDataset = 'all';
 let indexExpanded = false;
 let allCardsCollapsed = false;
-const INDEX_PREVIEW = 15;
+const INDEX_PREVIEW = 18;
 
-// ── Stage labels ──
-const STAGE_LABELS = {
-  w1:'第一周', w2:'第二周', w3:'第三周', w4:'第四周',
-  gen:'通用'
-};
 const ALL_TAGS = ['全部','第一周','第二周','第三周','第四周','孕期','减脂','养生','通用'];
-const DATASET_LABELS = {all:'全部数据', top200:'之前前200条', older_2023_12_14_before:'新增老帖'};
+const DATASET_LABELS = {all:'全部数据', top200:'前200条', older_2023_12_14_before:'新增老帖'};
 
-// ── Init ──
 function init() {
   renderFilterTags();
   renderAll();
   applyAllFilters();
-  
-  document.getElementById('searchInput').addEventListener('input', debounce(applyAllFilters, 200));
+  document.getElementById('searchInput').addEventListener('input', debounce(applyAllFilters, 180));
   document.getElementById('indexList').addEventListener('click', e => {
     const link = e.target.closest('a[href^="#r"]');
     if (!link) return;
     e.preventDefault();
     scrollToRecipe(link.getAttribute('href'));
   });
-  
-  // Fix initial hash jump after JS-rendered anchors exist
-  requestAnimationFrame(() => {
-    if (location.hash) scrollToRecipe(location.hash, false);
-  });
-  
-  // Scroll handler
   window.addEventListener('scroll', () => {
-    document.getElementById('backTop').classList.toggle('show', window.scrollY > 300);
+    document.getElementById('backTop').classList.toggle('show', window.scrollY > 320);
+    updateOutlineActive();
   });
+  requestAnimationFrame(() => { if (location.hash) scrollToRecipe(location.hash, false); });
 }
 
 function renderFilterTags() {
   const container = document.getElementById('filterTags');
-  container.innerHTML = ALL_TAGS.map(t => {
-    const stage = t === '全部' ? 'gen' : 
-      (t === '第一周' ? 'w1' : t === '第二周' ? 'w2' : t === '第三周' ? 'w3' : t === '第四周' ? 'w4' : 'gen');
-    const cls = t === '全部' ? 'active' : '';
-    const bg = stage === 'w1' ? 'w1' : stage === 'w2' ? 'w2' : stage === 'w3' ? 'w3' : stage === 'w4' ? 'w4' : 'gen';
-    return `<button class="filter-tag ${cls}" data-tag="${t}" onclick="setTag('${t}', this)">${t}</button>`;
-  }).join('');
+  container.innerHTML = ALL_TAGS.map(t => `<button class="filter-tag ${t === '全部' ? 'active' : ''}" data-tag="${t}" onclick="setTag('${t}', this)">${t}</button>`).join('');
 }
 
-// ── Sorting ──
+function getDatasetRecipes() {
+  return RECIPES.filter(r => activeDataset === 'all' || r.source_batch === activeDataset);
+}
+
 function getSortedRecipes() {
-  let list = RECIPES.filter(r => activeDataset === 'all' || r.source_batch === activeDataset);
+  let list = [...getDatasetRecipes()];
   if (activeSort === 'date') {
-    list.sort((a,b) => (b.publish_ts || 0) - (a.publish_ts || 0) || b.likes_num - a.likes_num);
+    list.sort((a,b) => (b.publish_ts || 0) - (a.publish_ts || 0) || (b.likes_num || 0) - (a.likes_num || 0));
   } else if (activeSort === 'likes') {
-    list.sort((a,b) => b.likes_num - a.likes_num);
+    list.sort((a,b) => (b.likes_num || 0) - (a.likes_num || 0) || (b.publish_ts || 0) - (a.publish_ts || 0));
   } else if (activeSort === 'stage') {
     const order = {w1:1, w2:2, w3:3, w4:4};
-    list.sort((a,b) => {
-      const ao = order[a.stage] || 99;
-      const bo = order[b.stage] || 99;
-      return ao - bo || b.likes_num - a.likes_num;
-    });
+    list.sort((a,b) => (order[a.stage] || 99) - (order[b.stage] || 99) || (b.publish_ts || 0) - (a.publish_ts || 0));
   }
   return list;
 }
 
-// ── Filtering ──
 function applyAllFilters() {
   const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  const clearBtn = document.getElementById('clearBtn');
-  clearBtn.classList.toggle('visible', query.length > 0);
-  
+  document.getElementById('clearBtn').classList.toggle('visible', query.length > 0);
   const sorted = getSortedRecipes();
   let visible = [];
-  
+
   sorted.forEach((r, i) => {
     const card = document.getElementById('card-' + i);
     if (!card) return;
-    
     let match = true;
-    
-    // Tag filter
     if (activeTag !== '全部') {
-      if (activeTag === '孕期' || activeTag === '减脂' || activeTag === '养生') {
-        match = r.stage_label === activeTag;
-      } else if (activeTag === '通用') {
-        match = r.stage_label === '通用';
-      } else {
-        match = r.stage_label === activeTag;
-      }
+      match = r.stage_label === activeTag;
     }
-    
-    // Search filter
     if (match && query) {
-      const searchText = (r.title + ' ' + r.stage_label + ' ' + r.ingredients.join(' ')).toLowerCase();
+      const searchText = [r.title, r.stage_label, ...(r.ingredients || []), ...(r.methods || [])].join(' ').toLowerCase();
       match = searchText.includes(query);
     }
-    
-    if (match) {
-      card.classList.remove('hidden');
-      visible.push(i);
-    } else {
-      card.classList.add('hidden');
-    }
+    card.classList.toggle('hidden', !match);
+    if (match) visible.push(i);
   });
-  
-  // Update result count
+
   const countEl = document.getElementById('resultCount');
-  if (query || activeTag !== '全部' || activeDataset !== 'all') {
-    countEl.textContent = `显示 ${visible.length} / ${getSortedRecipes().length} 道菜谱`;
-    countEl.classList.add('visible');
-  } else {
-    countEl.classList.remove('visible');
-  }
-  
-  // Update index highlights
+  const total = sorted.length;
+  countEl.textContent = `显示 ${visible.length} / ${total} 道菜谱`;
+  countEl.classList.toggle('visible', query || activeTag !== '全部' || activeDataset !== 'all');
+  document.getElementById('emptyState').classList.toggle('visible', visible.length === 0);
   updateIndex(visible);
-  updateSummary(visible.length, query);
+  updateSummary(visible.length, total, query);
 }
 
 function updateIndex(visibleIds) {
   const items = document.querySelectorAll('#indexList li');
   items.forEach(li => {
-    const link = li.querySelector('a');
-    if (!link) return;
-    const href = link.getAttribute('href');
-    const idMatch = href && href.match(/r(\d+)/);
-    if (!idMatch) return;
-    const idx = parseInt(idMatch[1]);
-    
-    if (visibleIds.includes(idx)) {
-      li.classList.remove('hidden');
-    } else {
-      li.classList.add('hidden');
-    }
+    const idx = Number(li.dataset.idx);
+    li.classList.toggle('hidden', !visibleIds.includes(idx));
   });
-  
-  // Update expand button
-  const visibleCount = document.querySelectorAll('#indexList li:not(.hidden)').length;
   const btn = document.getElementById('expandBtn');
+  const visibleCount = visibleIds.length;
   if (indexExpanded) {
     btn.textContent = '收起 ▴';
-  } else {
-    if (visibleCount > INDEX_PREVIEW) {
-      btn.textContent = `展开全部 ${getSortedRecipes().length} 道 ▾`;
-      btn.style.display = 'block';
-      // Hide items beyond preview
-      document.querySelectorAll('#indexList li:not(.hidden)').forEach((li, i) => {
-        if (i >= INDEX_PREVIEW) li.classList.add('hidden');
-      });
-    } else {
-      btn.style.display = visibleCount > INDEX_PREVIEW ? 'block' : 'none';
-    }
+    btn.style.display = visibleCount > INDEX_PREVIEW ? 'block' : 'none';
+    return;
   }
+  let shown = 0;
+  items.forEach(li => {
+    if (!li.classList.contains('hidden')) {
+      if (shown >= INDEX_PREVIEW) li.classList.add('hidden');
+      shown++;
+    }
+  });
+  btn.textContent = `展开全部 ${visibleCount} 道 ▾`;
+  btn.style.display = visibleCount > INDEX_PREVIEW ? 'block' : 'none';
 }
 
-
-function updateSummary(visibleCount, query) {
-  const countEl = document.getElementById('summaryCount');
-  const metaEl = document.getElementById('summaryMeta');
-  const noteEl = document.getElementById('summaryNote');
-  if (!countEl || !metaEl || !noteEl) return;
-  countEl.textContent = `${visibleCount} 道菜谱`;
+function updateSummary(visibleCount, total, query) {
   const sortLabel = activeSort === 'date' ? '发帖时间倒序' : activeSort === 'likes' ? '点赞最多' : '按阶段排列';
   const tagLabel = activeTag === '全部' ? '全部阶段' : activeTag;
-  metaEl.textContent = `${DATASET_LABELS[activeDataset] || '全部数据'} · ${tagLabel} · ${sortLabel}`;
-  noteEl.textContent = query ? `正在搜索「${query}」` : '点击目录可跳到菜谱，卡片可单独展开或收起';
+  document.getElementById('summaryCount').textContent = `${visibleCount} / ${total} 道菜谱`;
+  document.getElementById('summaryMeta').textContent = `${DATASET_LABELS[activeDataset]} · ${tagLabel} · ${sortLabel}`;
+  document.getElementById('summaryNote').textContent = query ? `正在搜索「${query}」，当前显示 ${visibleCount} 道。` : `当前为 ${DATASET_LABELS[activeDataset]}，显示 ${visibleCount} 道。`;
 }
 
 function quickPreset(tag) {
-  const nextTag = tag || '全部';
-  const btn = document.querySelector(`.filter-tag[data-tag="${nextTag}"]`);
-  if (btn) setTag(nextTag, btn);
   document.getElementById('searchInput').value = '';
-  document.getElementById('clearBtn').classList.remove('visible');
+  const btn = document.querySelector(`.filter-tag[data-tag="${tag || '全部'}"]`);
+  if (btn) setTag(tag || '全部', btn);
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// ── Actions ──
 function setDataset(dataset, btn) {
   activeDataset = dataset;
-  document.querySelectorAll('.dataset-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.dataset-tab').forEach(b => b.classList.toggle('active', b.dataset.dataset === dataset));
   indexExpanded = false;
   renderAll();
   applyAllFilters();
-  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function setTag(tag, btn) {
@@ -425,42 +446,6 @@ function clearSearch() {
   applyAllFilters();
 }
 
-function scrollToRecipe(hash, updateHash = true) {
-  const target = document.querySelector(hash);
-  if (!target) return;
-  const card = target.closest('.recipe-card');
-  if (card) card.classList.remove('collapsed');
-  target.scrollIntoView({behavior:'smooth', block:'start'});
-  if (updateHash) history.pushState(null, '', hash);
-}
-
-function toggleIndex() {
-  indexExpanded = !indexExpanded;
-  const btn = document.getElementById('expandBtn');
-  const items = document.querySelectorAll('#indexList li');
-  const visibleItems = document.querySelectorAll('#indexList li:not(.hidden)');
-  
-  if (indexExpanded) {
-    // Show all
-    items.forEach(li => li.classList.remove('hidden'));
-    btn.textContent = '收起 ▴';
-  } else {
-    // Show only first 15 amongst visible (excluding search-hidden)
-    let shown = 0;
-    items.forEach(li => {
-      if (!li.classList.contains('hidden')) {
-        // This is a visible item (not search-hidden), check if beyond preview
-        if (shown >= INDEX_PREVIEW) {
-          li.classList.add('hidden');
-        }
-        shown++;
-      }
-    });
-    btn.textContent = `展开全部 ${getSortedRecipes().length} 道 ▾`;
-  }
-}
-
-// ── Render ──
 function renderAll() {
   renderIndex();
   renderCards();
@@ -468,55 +453,38 @@ function renderAll() {
 
 function renderIndex() {
   const sorted = getSortedRecipes();
-  const container = document.getElementById('indexList');
-  container.innerHTML = sorted.map((r, i) => {
-    const escTitle = escapeHTML(r.short_title || r.title.substring(0, 35));
-    return `<li>
+  document.getElementById('indexList').innerHTML = sorted.map((r, i) => `
+    <li data-idx="${i}">
       <span class="idx">${i+1}</span>
-      <a href="#r${i}">${escTitle}</a>
-      <span class="idx-badge ${r.stage}">${r.stage_label}</span>
-    </li>`;
-  }).join('');
+      <a href="#r${i}">${escapeHTML(r.short_title || r.title)}</a>
+      <span class="idx-badge ${r.stage || 'gen'}">${escapeHTML(r.stage_label || '通用')}</span>
+    </li>`).join('');
 }
 
 function renderCards() {
   const sorted = getSortedRecipes();
-  const container = document.getElementById('recipeContainer');
-  
-  container.innerHTML = sorted.map((r, i) => {
+  document.getElementById('recipeContainer').innerHTML = sorted.map((r, i) => {
     const collapsedClass = allCardsCollapsed ? ' collapsed' : '';
-    let html = `<article class="recipe-card${collapsedClass}" id="card-${i}">
-  <div class="card-header" onclick="toggleCard(${i})" role="button" tabindex="0" aria-label="展开或收起 ${escapeHTML(r.title)}">
-    <div class="card-num" id="r${i}">${i+1}</div>
-    <div class="card-title">${escapeHTML(r.title)}</div>
-    <span class="toggle-card" aria-hidden="true">⌄</span>
-  </div>
-  <div class="meta-row">
-    <span class="time-badge bg-${r.stage}">${r.stage_label}</span>
-    ${r.publish_date ? `<span class="time-badge bg-gen">发布 ${r.publish_date}</span>` : ''}
-    ${r.source_batch === 'older_2023_12_14_before' ? `<span class="time-badge source-badge old">新增老帖</span>` : ''}
-    ${r.likes_num ? `<span class="time-badge bg-gen">${formatLikes(r.likes_num)} 赞</span>` : ''}
-  </div>
-  <div class="card-body">`;
-    
-    if (r.ingredients && r.ingredients.length) {
-      html += '\n    <div class="section-label">原料</div>';
-      r.ingredients.forEach(ing => {
-        html += `\n    <div class="section-content"><p>${escapeHTML(ing)}</p></div>`;
-      });
-    }
-    
-    if (r.methods && r.methods.length) {
-      html += '\n    <div class="section-label">做法</div>';
-      html += '\n    <ol class="method-steps">';
-      r.methods.forEach(m => {
-        html += `\n      <li>${escapeHTML(m)}</li>`;
-      });
-      html += '\n    </ol>';
-    }
-    
-    html += '\n  </div>\n</article>';
-    return html;
+    const source = r.source_batch === 'older_2023_12_14_before' ? '<span class="time-badge source-badge old">新增老帖</span>' : '';
+    const ingredients = (r.ingredients || []).map(ing => `<div class="section-content"><p>${escapeHTML(ing)}</p></div>`).join('');
+    const methods = (r.methods || []).map(m => `<li>${escapeHTML(m)}</li>`).join('');
+    return `<article class="recipe-card${collapsedClass}" id="card-${i}">
+      <div class="card-header" onclick="toggleCard(${i})" role="button" tabindex="0" aria-label="展开或收起 ${escapeHTML(r.title)}">
+        <div class="card-num" id="r${i}">${i+1}</div>
+        <h3 class="card-title">${escapeHTML(r.title)}</h3>
+        <span class="toggle-card" aria-hidden="true">⌄</span>
+      </div>
+      <div class="meta-row">
+        <span class="time-badge bg-${r.stage || 'gen'}">${escapeHTML(r.stage_label || '通用')}</span>
+        ${r.publish_date ? `<span class="time-badge bg-gen">${escapeHTML(r.publish_date)}</span>` : ''}
+        ${source}
+        ${r.likes_num ? `<span class="time-badge bg-gen">${formatLikes(r.likes_num)} 赞</span>` : ''}
+      </div>
+      <div class="card-body">
+        ${ingredients ? `<div class="section-label">原料 / 摘要</div>${ingredients}` : ''}
+        ${methods ? `<div class="section-label">做法</div><ol class="method-steps">${methods}</ol>` : ''}
+      </div>
+    </article>`;
   }).join('');
 }
 
@@ -527,22 +495,43 @@ function toggleCard(i) {
 
 function toggleAllCards() {
   allCardsCollapsed = !allCardsCollapsed;
-  document.querySelectorAll('.recipe-card').forEach(card => {
-    card.classList.toggle('collapsed', allCardsCollapsed);
+  document.querySelectorAll('.recipe-card').forEach(card => card.classList.toggle('collapsed', allCardsCollapsed));
+  document.getElementById('collapseAllBtn').textContent = allCardsCollapsed ? '展开全部' : '收起全部';
+}
+
+function toggleIndex() {
+  indexExpanded = !indexExpanded;
+  applyAllFilters();
+}
+
+function scrollToRecipe(hash, updateHash = true) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const card = target.closest('.recipe-card');
+  if (card) card.classList.remove('collapsed');
+  target.scrollIntoView({behavior:'smooth', block:'start'});
+  if (updateHash) history.pushState(null, '', hash);
+}
+
+function updateOutlineActive() {
+  const links = [...document.querySelectorAll('.outline a')];
+  if (!links.length) return;
+  let current = links[0];
+  links.forEach(link => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target && target.getBoundingClientRect().top < 160) current = link;
   });
-  const btn = document.getElementById('collapseAllBtn');
-  if (btn) btn.textContent = allCardsCollapsed ? '展开全部' : '收起全部';
+  links.forEach(link => link.classList.toggle('active', link === current));
 }
 
 function formatLikes(n) {
-  if (!n) return '0';
+  n = Number(n) || 0;
   return n >= 10000 ? `${Math.round(n / 10000)}万` : String(n);
 }
 
-// ── Utils ──
 function escapeHTML(str) {
   str = String(str || '');
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 function debounce(fn, ms) {
@@ -553,9 +542,7 @@ function debounce(fn, ms) {
   };
 }
 
-// ── Start ──
 init();
 </script>
-
 </body>
 </html>
